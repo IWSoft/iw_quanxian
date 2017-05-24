@@ -1,0 +1,18 @@
+.bootstrap-table_row_padding td{
+    padding-bottom: 5px;
+    padding-top:5px;
+    padding-left:5px;
+    padding-right: 5px;
+}
+
+.bootstrap-table_row_color td{
+    background:#ffffff ;
+}
+
+.bootstrap-table_row_color2 td{
+    background:#dddddd;
+}
+
+.toolbar_my{
+    margin-bottom: 3px;
+}
