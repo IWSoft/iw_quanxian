@@ -14,9 +14,9 @@ CodeIgniter3.0  、php>=5.5、mysql>=5.1、建议apache;
 主要是通用功能，如：通用审核，通用增删查改
 
 系统截屏如下：
-![image](https://github.com/zjwtnt/iw_quanxian/screenshots/1.png)
-![image](https://github.com/zjwtnt/iw_quanxian/screenshots/2.png)
-![image](https://github.com/zjwtnt/iw_quanxian/screenshots/3.png)
-![image](https://github.com/zjwtnt/iw_quanxian/screenshots/4.png)
-![image](https://github.com/zjwtnt/iw_quanxian/screenshots/5.png)
-![image](https://github.com/zjwtnt/iw_quanxian/screenshots/6.png)
+![image](https://raw.githubusercontent.com/IWSoft/iw_quanxian/master/screenshots/1.png)
+![image](https://raw.githubusercontent.com/IWSoft/iw_quanxian/master/screenshots/2.png)
+![image](https://raw.githubusercontent.com/IWSoft/iw_quanxian/master/screenshots/3.png)
+![image](https://raw.githubusercontent.com/IWSoft/iw_quanxian/master/screenshots/4.png)
+![image](https://raw.githubusercontent.com/IWSoft/iw_quanxian/master/screenshots/5.png)
+![image](https://raw.githubusercontent.com/IWSoft/iw_quanxian/master/screenshots/6.png)
