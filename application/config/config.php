@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |  以"/"结束
 */
-$config['base_url'] = '/iwei/iwei/';
+$config['base_url'] = '/';
 
 /*
 |--------------------------------------------------------------------------
@@ -530,5 +530,21 @@ $config["def_dd_upload_filesize"] = "2";//默认的上传文件大小
 $config["def_pagesize"] = "10";//默认选中分页 def_pagesize_arr
 $config["def_pagesize_arr"] = array("5","10","50","100","150","200","ALL");
 $config["def_btn_color_arr"] = array("btn-primary","btn-default","btn-success","btn-info","btn-warning","btn-danger","btn-white","btn-link");//按钮颜色风格
+
+//订餐时效部分
+$config["dingcan_linshi_amount"] = "5a08742f-2980-ae4b-b08c-03301c0d7e25";//临时订餐数量设置
+$config["dingcan_linshi_btn"] = "5e583bbb-6fe9-b2ac-f6a4-b07f110537d9";//开放或关闭临时订餐功能
+
+$config["dingcan_jintian_mingtian_linshi"] = "c5bcdd99-8c74-ae06-aa01-64b6efc5a405";//接收明天临时订餐(早、午餐)时间是今天：
+$config["dingcan_jintian_linshi"] = "8959499d-d5b5-98dd-8a8b-e6759a6c889b";//今临订结束时间
+$config["dingcan_mingtian_quxiao_gucan"] = "65fa43c3-d22c-035c-366e-906365975ee6";//明天固餐取消时间
+$config["dingcan_zhuanchu_jieshou"] = "f8100e46-2235-46f4-6332-bdb81a0c897f";//今转出或接收时间
+
+$config["dingcan_zaocan_guid"] = "5f81d52e-a48b-dc1f-f8a2-dca543c55463";//早餐GUID
+$config["dingcan_wucan_guid"] = "3d99f59f-3b6b-965b-2065-3423326dc20d";//午餐GUID
+
+$config["dingcan_guding_guid"] = "e82dfbef-9e54-6e40-3f79-06adc02784ec"; //固餐GUID
+$config["dingcan_linshi_guid"] = "a5c9ff51-326a-0a7d-fa17-4f2593476968"; //临时GUID
+
 //endregion
 

@@ -8,9 +8,17 @@
     <title><?php echo $system_name;?></title>
     <?php
     $this->load->view(__ADMIN_TEMPLATE__ . '/header.inc.php');
-
     ?>
-
+<style>
+    .system_message i{
+        width:16px;
+        height: 15px;
+        padding-top: 1px;
+        margin-right: 5px;
+        text-align: center;
+        border: 1px solid #000000;
+    }
+</style>
 </head>
 
 
@@ -69,15 +77,17 @@
 
                     for ($i = 0; $i < count($menu); $i++) {
                         $menu[$i]["sub_menu"] = array();
+                        $j_index = 0;
                         for ($j = 0; $j < count($menu2); $j++) {
-                            $j_index = 0;
                             if ($menu[$i]["guid"] == $menu2[$j]["parent_guid"]) {
                                 //$menu[$i]["sub_menu"][$j_index] = $menu2[$j];
                                 array_push($menu[$i]["sub_menu"],$menu2[$j]);
                                 $j_index2 = 0;
                                 for ($k = 0; $k < count($menu3); $k++) {
                                     if ($menu2[$j]["guid"] == $menu3[$k]["parent_guid"]) {
+                                        //echo $menu2[$j]["title"]."|".$menu3[$k]["title"]."<br/>";
                                         $menu[$i]["sub_menu"][$j_index]["sub_menu"][$j_index2] = $menu3[$k];
+                                        //print_r($menu3[$k]);
                                         //array_push($menu[$i]["sub_menu"][$j_index]["sub_menu"],$menu3[$k]);
                                         $j_index2++;
                                     }
@@ -91,16 +101,15 @@
                     //三层合一
                     $is_desktop = false;//标识是不是已设定主页位置
                     $deskto_url = "";
-
                     foreach ($menu as $k => $v) {
                         echo '<li>';
                         //if($v["urltype"]==0){
                         //一级菜单
                         if ($v["url_target"] != "_layerbox") {
-                            echo '<a href="' . ($v["urltype"] == 0 && $v["url"] != "" ? site_url2($v["url"]) : $v["url"]) . '" target="' . ($v["url_target"]) . '"';
+                            echo '<a id="'.$v["guid"].'" href="' . ($v["urltype"] == 0 && $v["url"] != "" ? site_url2($v["url"]) : $v["url"]) . '" target="' . ($v["url_target"]) . '"';
                         } else {
                             //弹层
-                            echo '<a href="javascript:void(0);" onclick="my_open_box({title:\''.str_replace("'","",$v["title"]).'\',url:\'' . ($v["urltype"] == 0 && $v["url"] != "" ? site_url2($v["url"]) : $v["url"]) . '\',width:0,height:0})" ';
+                            echo '<a  id="'.$v["guid"].'" href="javascript:void(0);" onclick="my_open_box({title:\''.str_replace("'","",$v["title"]).'\',url:\'' . ($v["urltype"] == 0 && $v["url"] != "" ? site_url2($v["url"]) : $v["url"]) . '\',width:0,height:0})" ';
                         }
                         if ($v["url"] != "" && $v["url"]!=base_url()."index.php/" && !$is_desktop ) {
                             echo 'data-index="0"';
@@ -125,11 +134,11 @@
                                 }
                                 echo '<li>';
                                 if ($v2["url_target"] != "_layerbox") {
-                                    echo '<a class="J_menuItem" href="' . ($url_level2) . '" target="' . ($v2["url_target"]) . '"';//$v2["urltype"]==0 && $v2["url"]!=""?site_url2($v2["url"]):$v2["url"]
+                                    echo '<a  id="'.$v2["guid"].'" class="J_menuItem" href="' . ($url_level2) . '" target="' . ($v2["url_target"]) . '"';//$v2["urltype"]==0 && $v2["url"]!=""?site_url2($v2["url"]):$v2["url"]
                                 }
                                 else{
                                     //弹层
-                                    echo '<a class="J_menuItem" href="javascript:void(0);" onclick="my_open_box({title:\''.str_replace("'","",$v2["title"]).'\',url:\'' . ($url_level2) . '\',width:0,height:0})" ';
+                                    echo '<a id="'.$v2["guid"].'" class="J_menuItem" href="javascript:void(0);" onclick="my_open_box({title:\''.str_replace("'","",$v2["title"]).'\',url:\'' . ($url_level2) . '\',width:0,height:0})" ';
                                 }
                                 if ($url_level2 != ""  && !$is_desktop) {
                                     echo ' data-index="0"';
@@ -155,11 +164,11 @@
                                         }
                                         echo '<li>';
                                         if ($v3["url_target"] != "_layerbox") {
-                                            echo '<a class="J_menuItem" href="' . ($url_level3) . '" target="' . ($v3["url_target"]) . '" ';
+                                            echo '<a id="'.$v3["guid"].'" class="J_menuItem" href="' . ($url_level3) . '" target="' . ($v3["url_target"]) . '" ';
                                         }
                                         else{
                                             //弹层
-                                            echo '<a class="J_menuItem" href="javascript:void(0);" onclick="my_open_box({title:\''.str_replace("'","",$v3["title"]).'\',url:\''.$url_level3.'\',width:0,height:0})" ';
+                                            echo '<a id="'.$v3["guid"].'" class="J_menuItem" href="javascript:void(0);" onclick="my_open_box({title:\''.str_replace("'","",$v3["title"]).'\',url:\''.$url_level3.'\',width:0,height:0})" ';
                                         }
                                         if ($url_level3 != ""   && !$is_desktop) {
                                             echo 'data-index="0"';
@@ -200,10 +209,106 @@
     <!--右侧部分开始-->
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <div class="row border-bottom">
-            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0; ">
+            <nav class="navbar  navbar-static-top" role="navigation" style="margin-bottom: 0; ">
                 <!--微型菜单按钮-->
-                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="javasript:void(0);"><i
-                        class="fa fa-bars"></i> </a>
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="javascript:void(0);"><i class="fa fa-bars"></i> </a>
+
+                <ul class=" nav navbar-top-links navbar-right ">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell"></i> <span class="label label-primary" id="system_message_count"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts" id="system_message" >
+
+
+                            <li class="divider"></li>
+                            <!--
+                            <li>
+                                <a href="profile.html">
+                                    <div>
+                                        <i class="fa fa-qq fa-fw"></i> 3条新回复 <span class="pull-right text-muted small">12分钟钱</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            -->
+                            <li id="system_message_more">
+                                <div class="text-center link-block  "  >
+                                    <?php //echo site_url2("list_system_msg");暂时用提醒语句?>
+                                    <a class="J_menuItem" href="javascript:tab__open('b54375b4-6c48-c5aa-ae52-a3cbeb33eef2')" data-index="10003">
+                                        <strong>查看所有 </strong> <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </li>
+                    </ul>
+                <script>
+                    function get_message(){
+                        $.ajax({
+                           url:"<?php echo site_url2("get_system_msg");?>",
+                           type:"get",
+                            dataType:"json",
+                            error:function(a,b){
+//                                console.log("aaa="+b);
+                            },
+                            success:function(list){
+                               //判断有多少条，如超出5条，则先清空旧
+
+                                if($(".system_message").length>=5){
+                                    $(".system_message").remove();
+                                }
+                               html="";
+                                read=0;
+                                for(i=0;i<list.length;i++) {
+                                    if(i<5) {
+                                        if (list[i]["isread"] == 0) {
+                                            read++;
+                                        }
+                                        //判断有无重复
+                                        ischongfu = false;
+                                        $(".system_message").each(function () {
+                                            if ($(this).attr("guid") == list[i]["guid"]) {
+                                                ischongfu = true;
+                                            }
+                                        });
+                                        if (!ischongfu) {
+                                            html += '<li guid="' + list[i]["guid"] + '" class="system_message"><a href="javascript:void(0);" title="'+list[i]["fulltitle"]+'" onclick=\'my_open_box({ title:"查看消息",url:"<?php echo site_url2("view_system_msg") . "?guid=";?>' + list[i]["guid"] + '",width:"30%",height:"40%"});\'><div><i style="color:' + list[i]["flag_font_color"] + ';background: ' + list[i]["flag_color"] + '" class="' + list[i]["flag"] + '"></i>' + (list[i]["isread"] == 0 ? "<b>" : "") + list[i]["title"] + (list[i]["isread"] == 0 ? "</b>" : "") + '<span class="pull-right text-muted small">' + list[i]["createdate"] + '</span></div></a></li>';
+                                        }
+                                    }
+
+                                }
+
+
+                                if(read==0){
+                                    $("#system_message_count").html('');
+                                }
+                                else {
+                                    $("#system_message_count").html(read);
+                                }
+                                if(list.length==0){
+                                    //$("#system_message_count").html('');
+                                    if($("#system_message").html()=='') {
+                                        html = "<li>暂无消息</li>";
+                                        $("#system_message").prepend(html);
+                                    }
+                                }
+                                else {
+                                    $("#system_message").prepend(html);
+                                }
+                                if(list.length>0){
+                                    $("#system_message_more").css("display","");
+                                }
+                                else{
+                                    $("#system_message_more").css("display","none");
+                                }
+                            }
+                        });
+                    }
+                    get_message();
+                    window.setInterval("get_message()",(1000*60*5));
+                </script>
             </nav>
         </div>
         <div class="row content-tabs">
@@ -265,7 +370,16 @@
 
 
 
-
+<script>
+    //辅助点击！
+    function tab__open(id){
+        $("#"+id).click();
+        if($(document).width()<1000) {
+            $('.navbar-minimalize').trigger('click');
+        }
+        layer.closeAll();
+    }
+</script>
 <?php
 $this->load->view(__ADMIN_TEMPLATE__ . '/footer.inc.php');
 ?>

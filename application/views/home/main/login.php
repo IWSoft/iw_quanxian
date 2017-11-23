@@ -61,8 +61,9 @@
                 <p class="m-t-md"></p>
                 <input type="text" name="user" minlength="3" type="text" required class="form-control uname" placeholder="<?php echo lang('home_login_user');?>" />
                 <input type="password" name="pwd" minlength="6" required class="form-control pword m-b" placeholder="<?php echo lang('home_login_pwd');?>" />
-                <a href=""><?php echo lang("home_forget_pwd");?></a>
+                <!--a href=""><?php echo lang("home_forget_pwd");?></a-->
                 <button class="btn btn-success btn-block" type="submit"><?php echo lang("home_login_btn");?></button>
+                <button class="btn btn-warning btn-block" type="button" onclick="window.location.href='<?php echo site_url2("reg/index");?>';">注册会员</button>
             </form>
         </div>
     </div>

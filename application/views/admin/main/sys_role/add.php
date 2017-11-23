@@ -133,7 +133,7 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                                                 //下级
                                                 for($m=0;$m<count($modules);$m++) {
                                                     if ($modules[$l]["guid"] == $modules[$m]["parent_guid"] && $modules[$m]["curr_level"] == 4) {
-                                                        //echo '<div class="row">';
+                                                       // echo '<div class="row">';
                                                         echo '<div class="col-sm-3 ">';
                                                         echo '<div class="checkbox checkbox-primary " >';
                                                         echo helper_str_pad2("　",$modules[$m]["curr_level"],"　");
@@ -146,7 +146,7 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                                                         echo '</label>
                                                 </div>';
                                                         echo "</div>";
-                                                        //echo "</div>";
+                                                       // echo "</div>";
 
 
 

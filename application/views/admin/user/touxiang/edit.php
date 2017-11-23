@@ -19,8 +19,8 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                     <?php
                         foreach ($list as $v) {
                             ?>
-                            <div class="col-md-1" style="margin-bottom: 3px;">
-<img onclick="setcurr(this)" style="cursor: pointer;" src="<?php echo $v["filepath"];?>"  logoguid="<?php echo $v["guid"];?>" width="90%" <?php echo $v["guid"]==$curr_logo_guid?"class='curr_sel_logo'":"";?> />
+                            <div class="col-sm-1" style="text-align: center; margin-bottom: 3px;">
+<img onclick="setcurr(this)" style="cursor: pointer;" src="<?php echo $v["filepath"];?>"  logoguid="<?php echo $v["guid"];?>" width="80" height="80" <?php echo $v["guid"]==$curr_logo_guid?"class='curr_sel_logo'":"";?> />
                             </div>
                             <?php
                         }

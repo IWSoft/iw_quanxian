@@ -37,8 +37,9 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
             <?php echo $miao>0?("timer: ".($miao).","):"";?>
             closeOnConfirm: false
         }, function () {
+            $url = "<?php echo $url;?>";
             if($url!="") {
-                window.location.href = "<?php echo $url;?>";
+                window.location.href = $url;
             }
         });
     </script>

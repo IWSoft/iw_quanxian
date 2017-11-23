@@ -63,6 +63,8 @@ if (!function_exists('cn_substr')) {
 
     function cn_substr($str, $slen, $startdd = 0)
     {
+
+
         global $cfg_soft_lang;
         if ($cfg_soft_lang == 'utf-8') {
             return cn_substr_utf8($str, $slen, $startdd);
@@ -154,8 +156,9 @@ if (!function_exists('create_guid')) {
  * 创建6位编号
  * @return int
  */
-function create_id(){
-    return mt_rand(100000,999999);
+function create_id()
+{
+    return mt_rand(100000, 999999);
 }
 
 /**
@@ -496,19 +499,22 @@ function helper_alert_danger_msg($str)
  * @param string $url
  * @param string $miao 多少秒后返回 不返回设为0
  */
-function helper_ok($msg="",$url="",$miao="0"){
-    $gourl = site_url2("/iw/main/msg/ok")."?url=".urlencode($url)."&msg=".urlencode($msg)."&miao=".$miao;
-    header("location:".$gourl);
+function helper_ok($msg = "", $url = "", $miao = "0")
+{
+    $gourl = site_url2("/iw/main/msg/ok") . "?url=" . urlencode($url) . "&msg=" . urlencode($msg) . "&miao=" . $miao;
+    header("location:" . $gourl);
 }
+
 /**
  * 通用信息提示页
  * @param string $msg
  * @param string $url
  * @param string $miao 多少秒后返回 不返回设为0
  */
-function helper_err($msg="",$url="",$miao="0"){
-    $gourl = site_url2("/iw/main/msg/err")."?url=".urlencode($url)."&msg=".urlencode($msg)."&miao=".$miao;
-    header("location:".$gourl);
+function helper_err($msg = "", $url = "", $miao = "0")
+{
+    $gourl = site_url2("/iw/main/msg/err") . "?url=" . urlencode($url) . "&msg=" . urlencode($msg) . "&miao=" . $miao;
+    header("location:" . $gourl);
 }
 
 /**
@@ -516,19 +522,20 @@ function helper_err($msg="",$url="",$miao="0"){
  * @param $data
  * @param $css_arr
  */
-function helper_include_css(&$data,$css_arr){
-    if(isset($data["header_include_css"])){
-        foreach($css_arr as $v)
-        array_push(
-            $data["header_include_css"],
-             "static/css/plugins/".$v
-            );
-    } else{
-        $data["header_include_css"] = array();
-        foreach($css_arr as $v)
+function helper_include_css(&$data, $css_arr)
+{
+    if (isset($data["header_include_css"])) {
+        foreach ($css_arr as $v)
             array_push(
                 $data["header_include_css"],
-                "static/css/plugins/".$v
+                "static/css/plugins/" . $v
+            );
+    } else {
+        $data["header_include_css"] = array();
+        foreach ($css_arr as $v)
+            array_push(
+                $data["header_include_css"],
+                "static/css/plugins/" . $v
             );
     }
 }
@@ -538,25 +545,26 @@ function helper_include_css(&$data,$css_arr){
  * @param $data
  * @param $js_arr
  */
-function helper_include_js(&$data,$js_arr){
-    if(isset($data["header_include_js"])){
-        foreach($js_arr as $v)
+function helper_include_js(&$data, $js_arr)
+{
+    if (isset($data["header_include_js"])) {
+        foreach ($js_arr as $v)
             array_push(
                 $data["header_include_js"],
-                "static/js/plugins/".$v
+                "static/js/plugins/" . $v
             );
-    }
-    else{
+    } else {
         $data["header_include_js"] = array();
-        foreach($js_arr as $v)
+        foreach ($js_arr as $v)
             array_push(
                 $data["header_include_js"],
-                "static/js/plugins/".$v
+                "static/js/plugins/" . $v
             );
     }
 }
 
-function helper_get_json_header(){
+function helper_get_json_header()
+{
     header("HTTP/1.0 200 OK");
     //header('Content-type: text/html; charset=utf-8');
     header('Content-type: application/json');
@@ -573,7 +581,8 @@ function helper_get_json_header(){
  * @param bool $isok 是否成功执行
  * @param int $miao 显示秒数
  */
-function helper_return_json($msg="操作成功",$url="",$isok=false,$miao=3){
+function helper_return_json($msg = "操作成功", $url = "", $isok = false, $miao = 3)
+{
     $json["isok"] = $isok;
     $json["msg"] = $msg;
     $json["miao"] = $miao;
@@ -586,10 +595,11 @@ function helper_return_json($msg="操作成功",$url="",$isok=false,$miao=3){
  * @param $count 往后输出多少个STR2
  * @param $str2 输出的字符
  */
-function helper_str_pad2($str,$count,$str2){
+function helper_str_pad2($str, $count, $str2)
+{
     $html = $str;
-    for ($i=0;$i<$count;$i++){
-        $html.= $str2;
+    for ($i = 0; $i < $count; $i++) {
+        $html .= $str2;
     }
     return $html;
 }
@@ -598,9 +608,10 @@ function helper_str_pad2($str,$count,$str2){
  * 返回上一个网页
  * @param bool $isencode 是否编码
  */
-function helper_pre_url($isencode=true){
-    $url =  $_SERVER['HTTP_REFERER'];
-    if($isencode){
+function helper_pre_url($isencode = true)
+{
+    $url = $_SERVER['HTTP_REFERER'];
+    if ($isencode) {
         $url = urlencode($url);
     }
     return $url;
@@ -609,12 +620,13 @@ function helper_pre_url($isencode=true){
 /**
  * 返回星期几
  */
-function helper_week(){
-    $val = date("w");
-    switch ($val){
+function helper_week($sel = "")
+{
+    $val = $sel >= 0 ? $sel : date("w");
+    switch ($val) {
         case 1:
             $val = "一";
-             break;
+            break;
         case 2:
             $val = "二";
             break;
@@ -635,7 +647,7 @@ function helper_week(){
             $val = "日";
             break;
     }
-    $val = "星期".$val;
+    $val = "星期" . $val;
     return $val;
 }
 
@@ -644,10 +656,242 @@ function helper_week(){
  * @param $str
  * @param $val
  */
-function helper_endwith($str,$val){
-    return substr($str,strlen($str)-1,1)==$val;
+function helper_endwith($str, $val)
+{
+    return substr($str, strlen($str) - 1, 1) == $val;
 }
-function helper_startwith($str,$val){
-    return substr($str,0,1)==$val;
+
+function helper_startwith($str, $val)
+{
+    return substr($str, 0, 1) == $val;
 }
+
+/**
+ * 发送短信
+ * @param $tel 多个手机号用","隔开
+ * @param $content
+ */
+function helper_send_msg($tel, $content)
+{
+    if ($tel == "") {
+        exit();
+    }
+
+    //暂时不使用（直接访问不了，需要内网）
+    return true;
+    $y = md5(date("Y-m-d H:i:s") . mt_rand(100, 110));
+    $content = urlencode($content);
+    $url = 'http://www.baidu.com/receive_msg.php?t=' . $tel . '&m=' . $content . '&y=' . $y;
+    // $url = "http://www.zsda.com/test.php";
+    $curl = curl_init();
+    /*
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_NOBODY, FALSE); // remove body
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    */
+    curl_setopt($curl, CURLOPT_URL, $url);
+    //设置头文件的信息作为数据流输出
+    curl_setopt($curl, CURLOPT_HEADER, 1);
+    //设置获取的信息以文件流的形式返回，而不是直接输出。
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    //执行命令
+    $data = curl_exec($curl);
+    // $info = curl_getinfo($sh);
+    // var_dump(curl_error($curl));exit;
+    //关闭URL请求
+    curl_close($curl);
+    return $data;
+
+}
+
+/**
+ * 返回超管的手机号,多个超管，请人","隔开
+ * @return string
+ */
+function helper_get_superadmin_tel()
+{
+    return "13531885559";
+}
+
+/**
+ * 获取excel操作对象
+ * @param $inputFileType excel类型 如：Excel5
+ * @param $excelpath 文件路径
+ * @return PHPExcel excel操作对象
+ */
+function helper_getObjPHPExcel($inputFileType = "Excel5", $excelpath = "third_lib/tmp.xls")
+{
+    //读取数据
+    require_once 'third_lib/PHPExcel.php';
+    require_once 'third_lib/PHPExcel/Writer/Excel2007.php';
+    require_once 'third_lib/PHPExcel/Writer/Excel5.php';
+    $objPHPExcel = new PHPExcel();
+    $objReader = PHPExcel_IOFactory::createReader($inputFileType); //use Excel5 for 2003 format
+    // $excelpath   =  'myexcel.xlsx';//excel所在路径
+    $objPHPExcel = $objReader->load($excelpath);
+    return $objPHPExcel;
+}
+
+
+/**
+ * 配合helper_getObjPHPExcel使用
+ * 导出excel模板,$table导出的excel数据库表
+ * @param $objWriter excel对象
+ */
+function helper_exportExcelTpl($objWriter, $title)
+{
+    header("Pragma: public");
+    header("Expires: 0");
+    header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+    header("Content-Type:application/force-download");
+    header("Content-Type:application/vnd.ms-execl");
+    header("Content-Type:application/octet-stream");
+    header("Content-Type:application/download");
+    header('Content-Disposition:attachment;filename="' . $title . date("Y-m-d") . '.xls"');
+    header("Content-Transfer-Encoding:binary");
+    $objWriter->save('php://output');
+}
+
+function helper_readExcel($filePath, $loadObj = false, $SheetIndex = 0)
+{
+
+    $objPHPExcel = "";
+    if (!$loadObj) {
+        //读取数据
+        require_once 'third_lib/PHPExcel.php';
+        /**默认用excel2007读取excel，若格式不对，则用之前的版本进行读取*/
+        $PHPReader = new PHPExcel_Reader_Excel2007();
+    } else {
+        $PHPReader = $loadObj;
+    }
+
+    if (!$PHPReader->canRead($filePath)) {
+        $PHPReader = new PHPExcel_Reader_Excel5();
+        if (!$PHPReader->canRead($filePath)) {
+            echo 'no Excel';
+            return;
+        }
+    }
+    $PHPExcel = $PHPReader->load($filePath);
+    /**读取excel文件中的第一个工作表*/
+    $currentSheet = $PHPExcel->getSheet($SheetIndex);
+    /**取得最大的列号*/
+    $allColumn = $currentSheet->getHighestColumn();
+    /**取得一共有多少行*/
+    $allRow = $currentSheet->getHighestRow();
+
+    /**从第二行开始输出，因为excel表中第一行为列名*/
+    $rows = array();
+    $i = 0;
+    $j = 0;
+    for ($currentRow = 1; $currentRow <= $allRow; $currentRow++) {
+        /**从第A列开始输出*/
+        $j = 0;
+        for ($currentColumn = 'A'; $currentColumn <= $allColumn; $currentColumn++) {
+            $cell = $currentSheet->getCellByColumnAndRow(ord($currentColumn) - 65, $currentRow);
+            $val = $cell->getValue();
+            /**ord()将字符转为十进制数*/
+            if ($currentColumn == 'A') {
+            }
+
+            if ($cell->getDataType() == PHPExcel_Cell_DataType::TYPE_NUMERIC) {
+                //识别日期格式，并转换
+                $cellstyleformat = $cell->getParent()->getStyle($cell->getCoordinate())->getNumberFormat();
+                $formatcode = $cellstyleformat->getFormatCode();
+                if (preg_match('/^(\[\$[A-Z]*-[0-9A-F]*\])*[hmsdy]/i', $formatcode)) {
+                    $value = gmdate("Y-m-d H:i:s", PHPExcel_Shared_Date::ExcelToPHP($val));
+                } else {
+                    $value = PHPExcel_Style_NumberFormat::toFormattedString($val, $formatcode);
+                }
+                $rows[$i][$j] = trim($value);
+            } else {
+                $rows[$i][$j] = trim($val);
+            }
+
+            $j++;
+        }
+        $i++;
+    }
+    return $rows;
+}
+
+/**
+ * 判断微信端
+ * @return bool
+ */
+function helper_is_weixin()
+{
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+
+        return true;
+    }
+    return false;
+}
+
+/**
+ * 移动端判断
+ * @return bool
+ */
+function helper_is_mobile()
+{
+    // 如果有HTTP_X_WAP_PROFILE则一定是移动设备
+    if (isset ($_SERVER['HTTP_X_WAP_PROFILE'])) {
+        return true;
+    }
+    // 如果via信息含有wap则一定是移动设备,部分服务商会屏蔽该信息
+    if (isset ($_SERVER['HTTP_VIA'])) {
+        // 找不到为flase,否则为true
+        return stristr($_SERVER['HTTP_VIA'], "wap") ? true : false;
+    }
+    // 脑残法，判断手机发送的客户端标志,兼容性有待提高
+    if (isset ($_SERVER['HTTP_USER_AGENT'])) {
+        $clientkeywords = array('nokia',
+            'sony',
+            'ericsson',
+            'mot',
+            'samsung',
+            'htc',
+            'sgh',
+            'lg',
+            'sharp',
+            'sie-',
+            'philips',
+            'panasonic',
+            'alcatel',
+            'lenovo',
+            'iphone',
+            'ipod',
+            'blackberry',
+            'meizu',
+            'android',
+            'netfront',
+            'symbian',
+            'ucweb',
+            'windowsce',
+            'palm',
+            'operamini',
+            'operamobi',
+            'openwave',
+            'nexusone',
+            'cldc',
+            'midp',
+            'wap',
+            'mobile'
+        );
+        // 从HTTP_USER_AGENT中查找手机浏览器的关键字
+        if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))) {
+            return true;
+        }
+    }
+    // 协议法，因为有可能不准确，放到最后判断
+    if (isset ($_SERVER['HTTP_ACCEPT'])) {
+        // 如果只支持wml并且不支持html那一定是移动设备
+        // 如果支持wml和html但是wml在html之前则是移动设备
+        if ((strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') !== false) && (strpos($_SERVER['HTTP_ACCEPT'], 'text/html') === false || (strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') < strpos($_SERVER['HTTP_ACCEPT'], 'text/html')))) {
+            return true;
+        }
+    }
+    return false;
+}
+
 ?>

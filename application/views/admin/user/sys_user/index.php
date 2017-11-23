@@ -106,9 +106,13 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                     title: '编号',
                     visible: true,
                     width: "5%"
+                },
+                {
+                    field: 'check_status_name',
+                    title: '审核状态'
                 }, {
                     field: 'username',
-                    title: '角色名称'
+                    title: '用户名'
                 }
                 ,{
                     field:'title',
@@ -116,12 +120,12 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                     visible: false
                 }
                 , {
-                    field: 'tel',
-                    title: '手机号'
+                    field: 'realname',
+                    title: '姓名'
                 }
                 , {
-                    field: 'email',
-                    title: '电子邮箱'
+                    field: 'company_name',
+                    title: '单位'
                 }
                 ,
                 {

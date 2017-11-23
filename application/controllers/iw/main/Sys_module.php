@@ -63,7 +63,7 @@ class Sys_module extends MY_AdminController
         $sortOrder = isset($get["sortOrder"]) ? $get["sortOrder"] : "";
 
         $key = isset($get["key"]) ? $get["key"] : "";
-        $where = " 1=1 ";
+        $where = " isdel='0' ";
         if ($key != "") {
             $where = " and title like '%" . $key . "%'";
         }

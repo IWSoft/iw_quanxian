@@ -43,7 +43,12 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                             </label>
                             <input placeholder="不修改密码请留空" type="password" class="form-control" maxlength="50" name="pwd2" />
                         </div>
-
+                        <div class="form-group form-inline">
+                            <label>
+                                *姓　　名
+                            </label>
+                            <input type="text" class="form-control" maxlength="10" id="form_realname" name="form_realname" value="<?php echo $model["realname"];?>"/>
+                        </div>
 
                         <div class="form-group form-inline">
                             <label>
@@ -103,6 +108,7 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
             rules: {
                 form_pwd: {required:false,minlength:6,maxlength:20,checkPwd:true},
                 pwd2:{required:false,equalTo:"#form_pwd",checkPwd:true},
+                form_realname:{required:true,maxlength:10},
                 form_tel:{required:true,digits:true,maxlength:11,
                     remote: {
                         url: "<?php echo site_url2('check_tel');?>",     //后台处理程序

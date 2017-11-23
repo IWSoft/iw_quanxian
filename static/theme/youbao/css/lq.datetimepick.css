@@ -1,0 +1,149 @@
+.selectul{
+    position:relative;
+    display:inline-block;
+    cursor:pointer;
+    float:left;
+    margin-right:4%;
+}
+.selectul ul{
+    position:absolute;
+    left:0;
+    top:0.625rem;
+    background:#fff;
+    border:1px solid #bdc3c7;
+    border-top:none;
+    padding:0px;
+    overflow:hidden;
+    overflow-y:auto;
+    display:none;
+    padding-top: 31px;
+    -webkit-box-shadow:1px 1px 2px #eee;
+    box-shadow:1px 1px 2px #eee;
+}
+.selectul ul li{
+    color:#6a7576;
+    font-size:0.75rem;
+    padding:0.75rem 0.625rem;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    font-size:0.875rem;
+}
+.selectul ul li:hover{
+    background:#666;
+    color:#fff;
+    cursor:pointer;
+}
+.selectfocus{
+    line-height:2rem;
+    border:1px solid #d3dcdd;
+    background-color: #fff;
+    padding:0 0 0 8px;
+    position: relative;
+    z-index: 1002;
+}
+.selectfocus em{
+    display:block;
+    background:url(../images/select-arr-default.gif) no-repeat right 0;
+    font-style:normal;
+    color:#4b555b;
+    padding-right:8px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+/*时间样式*/
+.lq-datetimepick{
+    width: 86%;
+    padding:1rem 0.5rem;
+    position: absolute;
+    border: 1px solid #d3dcdd;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 0 7px rgba(0,0,0,.2);
+    box-shadow: 0 0 7px rgba(0,0,0,.2);
+    display: none;
+    max-width:100%;
+}
+.datetime-arr{
+    width: 5%;
+    height: 1rem;
+    position: absolute;
+    left: 45%;
+    top: -7px;
+    background: url("../images/pop-tips-info-arr.gif") no-repeat 0 0;
+}
+.select-datetime dl.datetime-day{
+    margin-bottom: 3rem;
+}
+.select-datetime dl dt{
+    float: left;
+    text-align: center;
+    line-height: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: #4b555b;
+}
+
+.select-datetime dl dd{
+    float: left;
+    background-color: #fff;
+    border: 1px solid #d3dcdd;
+    padding: 7px 0 6px;
+    margin: -1px 0 0 -1px;
+    line-height: 20px;
+    text-align: center;
+    color: #4b555b;
+    cursor: pointer;
+}
+.select-datetime dl dd em{
+    display: block;
+    font-size:0.875rem;
+}
+.select-datetime dl dd.over{
+    color: #95a5a6;
+    background-color: #ecf0f1;
+}
+.select-datetime dl dd.selected{
+    color: #ffffff;
+    background-color: #6b7879;
+}
+
+
+
+/*年份*/
+.datetime-select{
+    height: 1.5rem;
+    clear: both;
+    margin-bottom: 0.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid #d3dcdd;
+}
+.datetime-select .selectul{
+    width: 48%;
+}
+.datetime-select > div:last-child {margin-right:0;}
+
+/*日期*/
+.select-datetime dl.datetime-day dt,
+.select-datetime dl.datetime-day dd{
+    width: 13.9%;
+    height: 1.375rem;
+    line-height: 1.375rem;
+}
+.select-datetime dl.datetime-day dt{
+    width: 14.2%;
+}
+.select-datetime dl.datetime-day dt span{
+    border-right: none;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.select-datetime dl dd.blank{
+    background-color: #fafbfb;
+}
+.select-datetime dl dd.current{
+    background-color: #f2f5f5;
+    font-weight: bold;
+}

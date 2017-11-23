@@ -11,6 +11,22 @@ class Login extends MY_HomeController
     }
 
     function index(){
+        //判断是否在微信端
+        if(helper_is_weixin() && !__WEIXIN_KAIFA__){
+            //取OPENIND
+            //初始化
+            $ch = curl_init();
+            //设置选项，包括URL
+            curl_setopt($ch, CURLOPT_URL, site_url2("weixin/wxauth/index"));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            //执行并获取HTML文档内容
+            $output = curl_exec($ch);
+            //释放curl句柄
+            curl_close($ch);
+            //打印获得的数据
+            print_r($output);
+        }
         $get  = $this->input->get();
         $data = $this->home_data;
         $data["url"] = isset($get["url"])?$get["url"]:"";
@@ -31,7 +47,12 @@ class Login extends MY_HomeController
         }
         $data["login_bk_img"] = (isset($filemodel["filepath"])?$filemodel["filepath"]:"");
         $data["system_name"] = $system_name;
-        $this->load->view(__HOME_TEMPLATE__."/main/login",$data);
+        if(helper_is_mobile()) {
+            $this->load->view(__HOME_TEMPLATE__ . "/main/login_youbao", $data);
+        }
+        else{
+            $this->load->view(__HOME_TEMPLATE__ . "/main/login", $data);
+        }
     }
 
     /**

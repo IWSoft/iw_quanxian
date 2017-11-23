@@ -719,7 +719,7 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
             if($(this).css("display")=="inline"){
                 <?php if($boxid!=""){?>
                 //console.log("aaaaa=" + $(this).contents().find("#<?php echo $boxid;?>").html());
-                $(this).contents().find("#<?php echo $boxid;?>").val($guid);
+                $(this).contents().find("#<?php echo $boxid;?>").val($guid);//.change();
                 <?php
                 }
                 ?>

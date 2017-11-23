@@ -45,6 +45,12 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                             <input type="password" class="form-control" maxlength="50" name="pwd2" />
                             </div>
 
+                        <div class="form-group form-inline">
+                            <label>
+                                *姓　　名
+                            </label>
+                            <input type="text" class="form-control" maxlength="10" id="form_realname" name="form_realname" value=""/>
+                        </div>
 
                         <div class="form-group form-inline">
                             <label>
@@ -54,9 +60,16 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                         </div>
                         <div class="form-group form-inline">
                             <label>
-                                *电子邮箱
+                                电子邮箱
                             </label>
                             <input type="text" class="form-control" maxlength="100" name="form_email" />
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <label>
+                                卡号(有卡号代表已办卡)
+                            </label>
+                            <input type="text" class="form-control" maxlength="10" name="form_card_no" />
                         </div>
 
                         <div class="form-group form-inline">
@@ -72,6 +85,20 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                                 echo '</label>';
                                 echo '</div>';
                             }
+                            ?>
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <label>
+                                所属单位
+                            </label>
+                            <?php
+                            echo "<select name='company'>\n";
+                            echo "<option value=''>选择一个单位</option>";
+                            foreach($company_list as $v){
+                                echo "<option value='".$v["guid"]."'>".$v["name"]."</option>\n";
+                            }
+                            echo "</select>";
                             ?>
                         </div>
 
@@ -123,8 +150,10 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                 form_username:{required:true,minlength:6,maxlength:20,checkPwd:true,remote: "<?php echo site_url2('check_username');?>"},
                 form_pwd: {required:true,minlength:6,maxlength:20,checkPwd:true},
                 pwd2:{required:true,equalTo:"#form_pwd",checkPwd:true},
+                form_realname:{required:true,maxlength:10},
                 form_tel:{required:true,digits:true,maxlength:11,remote: "<?php echo site_url2('check_tel');?>"},
-                form_email:{required:true,email:true,remote: "<?php echo site_url2('check_email');?>"}
+                form_email:{required:false,email:true,remote: "<?php echo site_url2('check_email');?>"},
+                form_card_no:{required:false,remote: "<?php echo site_url2('check_card_no');?>"}
             },
 
             messages: {
@@ -137,6 +166,10 @@ $this->load->view(__ADMIN_TEMPLATE__ . "/common_header");
                 ,
                 form_email:{
                     remote:"邮箱重复"
+                }
+                ,
+                form_card_no:{
+                    remote:"卡号重复"
                 }
             },
             //是否在获取焦点时验证

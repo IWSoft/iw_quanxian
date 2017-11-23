@@ -98,6 +98,24 @@ class m_aiw_dd extends m_common
     }
 
 
+    /**
+     * 返回微信设置
+     */
+    function get_weixin_config(){
+        $list = $this->get_list("parent_guid='290aa85f-c081-e228-5375-9fd32713e1de'");
+        $arr = array("token","encodingaeskey","appid","appsecret");
+        $config = array();
+        foreach ($list as $k=>$v){
+            if(in_array($v["title"],$arr)){
+                $config[$v["title"]] = $v["val"];
+            }
+        }
+        return $config;
+    }
+
+
+
+
 
 
 

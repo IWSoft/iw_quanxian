@@ -7621,12 +7621,16 @@ body.skin-3 {
         min-height: 100px;
     }
     .nav.navbar-top-links li.dropdown {
-        display: none;
+        /*display: none;*/
     }
     .ibox-tools {
         float: none;
         text-align: left;
         display: inline-block;
+    }
+
+    .navbar-top-links .dropdown-alerts {
+        margin-left: 0px;
     }
 }
 

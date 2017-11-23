@@ -122,6 +122,7 @@ $(function () {
         $('.J_menuTab').each(function () {
             //每一个tab
             var $this = $(this);
+
             if ($this.data('id') == dataUrl) {
                 if (!$this.hasClass('active')) {
                     $this.addClass('active').siblings('.J_menuTab').removeClass('active');

@@ -60,7 +60,90 @@ class Home extends MY_AdminController
         $this->load->view(__ERROR_TEMPLATE__."/html/error_404",$data);
     }
 
-    function test(){
-        echo "yes";
+    /**
+     * 自动调用系统消息
+     */
+    function get_system_msg(){
+        $this->load->model("main/m_aiw_sys_message");
+        $list = $this->m_aiw_sys_message->get_msg($this->admin_guid(),true);
+        //读出模块的打开方式
+        exit(json_encode($list));
+    }
+
+    function view_system_msg(){
+        $this->load->model("main/m_aiw_sys_message");
+        $get = $this->input->get();
+        $guid = isset($get["guid"])?$get["guid"]:"";
+        if($guid==""){
+            exit();
+        }
+        $model = $this->m_aiw_sys_message->get($guid);
+        $model["isread"] = '1';
+        $this->m_aiw_sys_message->update($model);
+        $data["model"] = $model;
+        $this->curr_path = $model["title"];
+        $this->load->view(__ADMIN_TEMPLATE__ . "/main/" . strtolower(__CLASS__ . "/" . __FUNCTION__), $data);
+    }
+
+    function list_system_msg(){
+        $this->load->model("main/m_aiw_sys_message");
+        $data = array();
+        helper_include_css($data, array(
+            "bootstrap-table/bootstrap-table.min.css",
+            "bootstrap-table/bootstrap-table.my.css",
+            "awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css",
+            "iCheck/custom.css"
+        ));
+        helper_include_js($data, array(
+            "bootstrap-table/bootstrap-table.min.js",
+            "bootstrap-table/bootstrap-table-mobile.min.js",
+            "bootstrap-table/locale/bootstrap-table-zh-CN.min.js",
+            "iCheck/icheck.min.js"
+        ));
+        $get = $this->input->get();
+        $parent_guid = isset($get["guid"])?$get["guid"]:"";
+        if($parent_guid!="") {
+            $data["model"] = $this->m_aiw_sys_module->get($parent_guid);
+        }
+        else{
+            $data["model"] = "";
+        }
+        $data["pagesize"] = $this->config->item("def_pagesize");
+        $data["form_btn"] = $this->admin_get_form_btn();
+        $data["form_list_btn"] = $this->admin_get_list_btn();
+        $this->load->view(__ADMIN_TEMPLATE__ . "/main/" . strtolower(__CLASS__ . "/" . __FUNCTION__), $data);
+    }
+
+
+    function list_system_msg_ajax()
+    {
+        $this->load->model("main/m_aiw_sys_message");
+        //pageSize, pageNumber, searchText, sortName, sortOrder
+        $get = $this->input->get();
+        $pagesize = isset($get["pageSize"]) ? $get["pageSize"] : $this->config->item("def_pagesize");
+        $pageindex = isset($get["pageNumber"]) ? $get["pageNumber"] : 1;
+        $searchText = isset($get["searchText"]) ? $get["searchText"] : "";
+        $sortName = isset($get["sortName"]) ? $get["sortName"] : "createdate";
+        $sortOrder = isset($get["sortOrder"]) ? $get["sortOrder"] : "desc";
+
+        $key = isset($get["key"]) ? $get["key"] : "";
+        $where = " receive_user='".$this->admin_guid()."'";
+        if ($key != "") {
+            $where = " and title like '%" . $key . "%'";
+        }
+        if ($searchText != "") {
+            $where = " and title like '%" . $searchText . "%'";
+        }
+
+        $model = $this->m_aiw_sys_message->get_list_pager($pageindex, $pagesize, $where, $sortName." ".$sortOrder);
+        foreach ($model["list"] as $k=>$v){
+            //标识赋值
+            $this->m_aiw_sys_message->msg_level_to_array($v["msg_level"],$model["list"][$k]);
+            $model["list"][$k]["createdate"] = date("Y-m-d H:i",$model["list"][$k]["createdate"]);
+        }
+        $list["rows"] = $model["list"];
+        $list["total"] = $model["total"];
+        helper_get_json_header();
+        exit(json_encode($list));
     }
 }

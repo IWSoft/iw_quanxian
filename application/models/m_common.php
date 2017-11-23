@@ -111,6 +111,7 @@ class m_common extends CI_Model
             'insert_id' => $this->db->insert_id(),
             'sql' => $this->db->last_query()
         );
+        //echo $this->db->last_query();
         //return $this->db->affected_rows(); //返回影响的行数
         return $arr["line"];
     }

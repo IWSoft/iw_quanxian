@@ -294,6 +294,7 @@ switch (ENVIRONMENT)
 
 
 @date_default_timezone_set('Asia/Shanghai');
+
 define("__ROOT__", str_replace("\\", "/", FCPATH));	//定义项目的根路径
 define("__WEIXIN_KAIFA__", true);//为TRUE则不读远程接口
 define("__OPENID__", "123456789");//模拟微信OPENID，当WXKF为TRUE时使用

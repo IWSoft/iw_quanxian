@@ -1,8 +1,29 @@
+<?php
+if($this->router->class=="desktop" && $this->router->method=="index"){
+
+}
+else {
+    ?>
+    <div style="height:10px;"></div>
+    <div class="col-md-12 col-sm-12 text-center">
+
+        <input type="button" value="返回首页" onclick="parent.tab__open('6478c00f-f1e6-6b87-825c-4f5c330f5b79');"
+               class="btn btn-danger" style="width: 100%"/>
+
+    </div>
+    <div style="clear:both;"></div>
+    <?php
+}
+?>
+</div>
+
 </div>
 </div>
 </div>
 </div>
-</div>
+
+
+
 </body>
 </html>
 
